@@ -1,308 +1,267 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>fivi</title>
+  <title>BEBIDAS YA!</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Fuentes y estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <style>
+    /* Estilos globales */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
+      padding-bottom: 70px;
+      background-color: #f8f9fa;
       margin: 0;
-      padding-bottom: 60px;
-      background: #fff8df;
-      color: #333;
     }
-    header {
-      background: #f44336;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-weight: bold;
-      position: relative;
-    }
-    h2 {
-      margin: 1rem;
-    }
-    .section-container {
-      display: flex;
-      overflow-x: auto;
-      padding: 0 1rem 1rem;
-      gap: 1rem;
-    }
-    .item {
-      min-width: 130px;
-      border: 1px solid #fdfcfc;
-      border-radius: 8px;
-      padding: 0.5rem;
-      background: #fffefe;
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .item img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    button {
-      margin-top: 0.5rem;
-      background: #ff9b06;
-      border: none;
-      color: rgb(255, 255, 255);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .store-section {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      gap: 1rem;
-    }
-    .store-item {
-      border: 1px solid #fcedb6;
-      border-radius: 8px;
-      padding: 1rem;
-      background: #fff8df;
-      text-align: left;
-    }
-    .store-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .info-container {
-      padding: 0.5rem;
-    }
-    .address, .hours {
-      font-size: 14px;
-      color: #555;
-    }
-    nav {
-      display: flex;
-      justify-content: space-around;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #f44336;
-      color: white;
-      padding: 0.7rem 0;
-      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
-    }
-    nav a {
-      color: rgb(253, 252, 252);
-      text-decoration: none;
-      font-weight: bold;
-    }
-    #cart-icon {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      cursor: pointer;
-      color: white;
-      font-weight: bold;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    #cart-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-    #cart-count {
-      background: #ff9b06;
-      border-radius: 50%;
-      padding: 2px 7px;
-      font-size: 14px;
-      color: white;
-      font-weight: bold;
-    }
-    #cart-dropdown {
-      display: none;
-      position: fixed;
-      top: 50px;
-      right: 10px;
-      width: 320px;
-      max-height: 400px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-      overflow-y: auto;
-      padding: 15px;
-    }
-    #cart-dropdown h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      text-align: center;
-      color: #f44336;
-    }
-    #cart-items p {
-      margin: 8px 0;
+
+    /* Navbar */
+    .navbar {
+      background-color: #ffffffc0 !important;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(19, 18, 18, 0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 16px;
+      border-radius: 0 0 15px 15px;
     }
-    #cart-items p button {
-      background: #f44336;
-      padding: 2px 6px;
+    .navbar .logo {
+      font-weight: bold;
+      font-size: 1.6rem;
+      color: #28a745;
+    }
+    .halloween-decor span {
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    /* Barra de búsqueda */
+    .search-bar {
+      max-width: 400px;
+      margin: 1rem auto;
+    }
+
+    /* Grid de productos */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    /* Tarjeta de producto */
+    .card {
+      border-radius: 15px;
+      overflow: hidden;
+      background-color: #fff;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-bottom: 2px solid #28a745;
+    }
+    .card-body h6 {
+      font-weight: 700;
+      color: #333;
+    }
+    .card-body p {
+      color: #28a745;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .btn-success {
+      background-color: #28a745;
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+    .nav-item {
+      position: relative;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #000;
+      text-decoration: none;
+    }
+    .contador {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
       font-size: 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      border: none;
-      color: white;
-      font-weight: normal;
-    }
-    #cart-total {
+      padding: 2px 6px;
       font-weight: bold;
-      margin-top: 10px;
-      font-size: 18px;
-      text-align: right;
     }
-    label {
-      font-size: 14px;
-      margin-top: 10px;
-      display: block;
-    }
-    input[type="text"], input[type="tel"] {
-      width: 100%;
-      padding: 6px;
-      margin-top: 4px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    #send-order-btn {
-      margin-top: 15px;
-      width: 100%;
-      background: #f44336;
-      color: white;
+
+    h3 {
+      color: #28a745;
+      text-align: center;
+      margin-bottom: 1rem;
       font-weight: bold;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+      .navbar .logo {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
+
 <body>
-<header>
-  PedidoYa
-  <div id="cart-icon" onclick="toggleCart()">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 18c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm10 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-13.157-3l1.72-8h13.437l-2.89 5.99-3.47-1.15-1.96 3.83-3.76-2.51zm1.157 3h12v2h-12z"/></svg>
-    <span id="cart-count">0</span>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1 class="logo">¡BEBIDAS YA!</h1>
+    <div class="halloween-decor">
+      <span>🎃</span>
+      <span>🦇</span>
+      <span>🕸️</span>
+      <span>🦉</span>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+      <input type="text" id="busqueda" class="form-control" placeholder="Buscar bebida..." />
+    </div>
+
+    <h3>BEBIDAS</h3>
+
+    <!-- Grid de productos -->
+    <div class="productos-grid" id="contenedor-productos">
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="caja de corona.jpeg" alt="Caja de Corona" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">CAJA DE CORONA</h6>
+          <p>$32.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="SIXPACK-CORONA-355-ML.webp" alt="Sixpack Corona" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">SIXPACK CORONA 355 ML</h6>
+          <p>$9.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="java de club.jpeg" alt="Java de Club Verde" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">JAVA DE CLUB VERDE</h6>
+          <p>$22.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
-<h2>Comida</h2>
-<div class="section-container" id="food-section"></div>
-<h2>Tiendas</h2>
-<div class="store-section" id="store-section"></div>
-<nav>
-  <a href="index.html">Inicio</a>
-  <a href="pedido.html">Canasta</a>
-</nav>
-<div id="cart-dropdown">
-  <h3>Tu carrito</h3>
-  <div id="cart-items"></div>
-  <div id="cart-total"></div>
-  <label for="telefono">Número de teléfono:</label>
-  <input type="tel" id="telefono" placeholder="Ej. +593987654321" />
-  <label for="direccion">Dirección de entrega:</label>
-  <input type="text" id="direccion" placeholder="Ej. Calle 123, Ciudad" />
-  <button id="send-order-btn" onclick="sendOrder()">Enviar pedido</button>
-</div>
-<script>
-const products = [
-  { id: 1, nombre: "Hamburguesa", precio: 5.99 },
-  { id: 2, nombre: "Pizza", precio: 8.99 },
-  { id: 3, nombre: "Ensalada", precio: 4.49 }
-];
-const foodSection = document.getElementById("food-section");
-products.forEach(prod => {
-  const div = document.createElement("div");
-  div.className = "item";
-  div.innerHTML = `
-    <p><strong>${prod.nombre}</strong></p>
-    <p>$${prod.precio.toFixed(2)}</p>
-    <button onclick="addToCart(${prod.id})">Agregar</button>
-  `;
-  foodSection.appendChild(div);
-});
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
-function setCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-function addToCart(productId) {
-  const cart = getCart();
-  const prod = products.find(p => p.id === productId);
-  cart.push(prod);
-  setCart(cart);
-  actualizarContador();
-  alert(`${prod.nombre} agregada al carrito`);
-}
-function actualizarContador() {
-  const cart = getCart();
-  document.getElementById("cart-count").textContent = cart.length;
-}
-actualizarContador();
-function toggleCart() {
-  const cartDropdown = document.getElementById("cart-dropdown");
-  if (cartDropdown.style.display === "block") {
-    cartDropdown.style.display = "none";
-  } else {
-    renderCartItems();
-    cartDropdown.style.display = "block";
-  }
-}
-function renderCartItems() {
-  const cart = getCart();
-  const container = document.getElementById("cart-items");
-  container.innerHTML = "";
-  let total = 0;
-  cart.forEach((item, index) => {
-    const p = document.createElement("p");
-    p.innerHTML = `
-      ${item.nombre} - $${item.precio.toFixed(2)}
-      <button onclick="removeItem(${index})">X</button>
-    `;
-    container.appendChild(p);
-    total += item.precio;
-  });
-  document.getElementById("cart-total").textContent = `Total: $${total.toFixed(2)}`;
-}
-function removeItem(index) {
-  const cart = getCart();
-  cart.splice(index, 1);
-  setCart(cart);
-  renderCartItems();
-  actualizarContador();
-}
-function sendOrder() {
-    const cart = getCart();
-    const telefono = document.getElementById("telefono").value;
-    const direccion = document.getElementById("direccion").value;
 
-    if (cart.length === 0) return alert("El carrito está vacío");
-    if (!telefono || !direccion) return alert("Completa los campos de teléfono y dirección");
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <i class="fas fa-home fa-lg"></i>
+      <div>Inicio</div>
+    </a>
+    <a href="carrito.html" class="nav-item">
+      <i class="fas fa-shopping-cart fa-lg"></i>
+      <span id="contador-carrito" class="contador">0</span>
+      <div>Carrito</div>
+    </a>
+  </nav>
 
-    fetch('http://localhost:5000/pedido', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ carrito: cart, telefono: telefono, direccion: direccion })
-    })
-    .then(response => response.json())
-    .then(data => alert(data.mensaje))
-    .catch(error => console.error("Error al enviar pedido:", error));
-}
+  <!-- Scripts -->
+  <script>
+    // Guardar producto en localStorage
+    function guardarProductoDesdeCard(elemento) {
+      const card = elemento.closest('.producto');
+      const nombre = card.querySelector('.card-title').textContent.trim();
+      const precioTexto = card.querySelector('p').textContent.trim();
+      const precio = parseFloat(precioTexto.replace('$', ''));
+      const imagen = card.querySelector('img').src;
+      const cantidadInput = card.querySelector('input[type="number"]');
+      const cantidad = parseInt(cantidadInput.value) || 1;
+      const producto = { nombre, precio, imagen, cantidad };
+      localStorage.setItem('productoSeleccionado', JSON.stringify(producto));
+    }
 
-</script>
+    // Comprar producto y redirigir
+    function comprarProductoDesdeCard(boton) {
+      guardarProductoDesdeCard(boton);
+      window.location.href = 'g.html';
+    }
+
+    // Contador de carrito
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    document.getElementById("contador-carrito").textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
+    // Filtrado de productos
+    document.getElementById("busqueda").addEventListener("input", function () {
+      const filtro = this.value.toLowerCase();
+      document.querySelectorAll(".producto").forEach(card => {
+        const titulo = card.querySelector(".card-title").textContent.toLowerCase();
+        card.style.display = titulo.includes(filtro) ? "block" : "none";
+      });
+    });
+
+    // Registro del Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registrado'))
+        .catch(error => console.log('Error al registrar el Service Worker:', error));
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
